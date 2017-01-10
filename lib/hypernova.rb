@@ -43,7 +43,8 @@ module Hypernova
   def self.replace_tokens_with_result(body, render_token_to_batch_token, batch_result)
     # replace all render tokens in the current response body with the
     # hypernova result for that render.
-    return body.gsub(RENDER_TOKEN_REGEX) do |render_token|
+    return body.scrub.gsub(RENDER_TOKEN_REGEX) do |render_token|
+
       batch_token = render_token_to_batch_token[render_token]
       if batch_token.nil?
         next render_token
